@@ -21,18 +21,18 @@ export default function UserAssets() {
         cacheProvider: true,
       })
 
-      const connection = await web3Modal.connect()
-      const provider = new ethers.providers.Web3Provider(connection)
-      const signer = provider.getSigner()
+      const connection = await web3Modal.connect();
+      const provider = new ethers.providers.Web3Provider(connection);
+      const signer = provider.getSigner();
         
-      const marketContract = new ethers.Contract(nftmarketaddress, Market.abi, signer)
-      const tokenContract = new ethers.Contract(nftaddress, NFT.abi, provider)
-      const data = await marketContract.FetchMyNFTs()
+      const marketContract = new ethers.Contract(nftmarketaddress, Market.abi, signer);
+      const tokenContract = new ethers.Contract(nftaddress, NFT.abi, provider);
+      const data = await marketContract.FetchMyNFTs();
       
       const items = await Promise.all(data.map(async i => {
-        const tokenUri = await tokenContract.tokenURI(i.tokenId)
-        const meta = await axios.get(tokenUri)
-        let price = ethers.utils.formatUnits(i.price.toString(), 'ether')
+        const tokenUri = await tokenContract.tokenURI(i.tokenId);
+        const meta = await axios.get(tokenUri);
+        let price = ethers.utils.formatUnits(i.price.toString(), 'ether');
         let item = {
           price,
           tokenId: i.tokenId.toNumber(),
@@ -41,9 +41,9 @@ export default function UserAssets() {
           image: meta.data.image,
         }
         return item
-      }))
-      setNfts(items)
-      setLoadingState('loaded') 
+      }));
+      setNfts(items);
+      setLoadingState('loaded');
     }
     if (loadingState === 'loaded' && !nfts.length) return (<h1 className="py-10 px-20 text-3xl">No assets owned</h1>)
     return (
