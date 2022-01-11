@@ -10,11 +10,11 @@ import {
 import NFT from '../artifacts/contracts/NFT.sol/NFT.json';
 import NFTMarket from '../artifacts/contracts/NFTMarket.sol/NFTMarket.json';
 
-let rpcEndpoint = null;
+let rpcEndpoint = "https://rpc-mumbai.matic.today";
 
-if (process.env.NEXT_PUBLIC_WORKSPACE_URL) {
-  rpcEndpoint = process.env.NEXT_PUBLIC_WORKSPACE_URL;
-}
+// if (process.env.NEXT_PUBLIC_WORKSPACE_URL) {
+//   rpcEndpoint = process.env.NEXT_PUBLIC_WORKSPACE_URL;
+// }
 
 export default function Home() {
 
